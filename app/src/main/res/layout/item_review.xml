@@ -13,7 +13,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
-        android:background="@color/white"
+        android:background="#1A77A8"
         android:orientation="horizontal">
 
     <LinearLayout
@@ -44,6 +44,7 @@
             android:fontFamily="@font/fira_sans_bold"
             android:gravity="center_horizontal|top"
             android:text="rate"
+            android:textColor="@color/white"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -65,6 +66,7 @@
                 android:layout_marginEnd="10dp"
                 android:fontFamily="@font/fira_sans_bold"
                 android:text="guest01@gmail.com"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <TextView
@@ -74,6 +76,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:text="date"
+                android:textColor="@color/white"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -86,7 +89,8 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="@color/white"/>
 
     </LinearLayout>
     </LinearLayout>

@@ -5,20 +5,22 @@ xmlns:tools="http://schemas.android.com/tools"
 android:id="@+id/main"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:background="#070C13"
+android:background="@drawable/background"
 tools:context=".authen.WelcomeActivity">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="250dp"
-        android:layout_height="89dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appCompatTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/fira_sans_bold"
+        android:text="Hotel Booking"
+        android:textColor="@color/white"
+        android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.256"
-        app:srcCompat="@drawable/app" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnGoToMain"
@@ -26,7 +28,7 @@ tools:context=".authen.WelcomeActivity">
         android:layout_height="0dp"
         android:background="#00FDFCFC"
         android:text="--- (Nhấn để tiếp tục) ---"
-        android:textColor="#ffffff"
+        android:textColor="@color/Cold_Blue"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,13 +42,13 @@ tools:context=".authen.WelcomeActivity">
         android:id="@+id/tv_hi"
         android:layout_width="341dp"
         android:layout_height="76dp"
-        android:text="Chào mừng trở lại\nVũ Hoàng Nam!"
+        android:text="Chào mừng trở lại\nNguyen Duy Han!"
         android:textAlignment="center"
-        android:textColor="#77D8FD"
+        android:textColor="@color/white"
         android:textSize="50px"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/appCompatTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

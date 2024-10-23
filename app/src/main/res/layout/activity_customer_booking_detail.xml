@@ -5,7 +5,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:id="@+id/main"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:background="@color/Dark"
+android:background="@drawable/background"
 tools:context=".customer.BookingDetailActivity">
 
 <LinearLayout
@@ -27,7 +27,7 @@ tools:context=".customer.BookingDetailActivity">
             android:layout_height="wrap_content"
             android:fontFamily="@font/fira_sans_bold"
             android:text="Trạng thái Booking:"
-            android:textColor="@color/green_200"
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
@@ -37,7 +37,7 @@ tools:context=".customer.BookingDetailActivity">
             android:fontFamily="@font/roboto"
             android:gravity="end"
             android:text="Địa chỉ chi tiết"
-            android:textColor="@color/green_200"
+            android:textColor="@color/black"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -49,7 +49,7 @@ tools:context=".customer.BookingDetailActivity">
         android:fontFamily="@font/fira_sans_bold"
         android:paddingTop="10dp"
         android:text="Thông tin khách đặt phòng:"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20sp" />
 
     <TextView
@@ -60,7 +60,7 @@ tools:context=".customer.BookingDetailActivity">
         android:layout_marginBottom="5dp"
         android:fontFamily="@font/fira_sans_bold"
         android:text="Họ tên:"
-        android:textColor="#F78686"
+        android:textColor="@color/black"
         android:textSize="22sp" />
 
     <TextView
@@ -70,7 +70,7 @@ tools:context=".customer.BookingDetailActivity">
         android:layout_marginBottom="5dp"
         android:fontFamily="@font/fira_sans"
         android:text="Số điện thoại:"
-        android:textColor="#F78686"
+        android:textColor="@color/black"
         android:textSize="20sp" />
 
     <TextView
@@ -80,7 +80,7 @@ tools:context=".customer.BookingDetailActivity">
         android:layout_marginBottom="5dp"
         android:fontFamily="@font/fira_sans"
         android:text="Email:"
-        android:textColor="#F78686"
+        android:textColor="@color/black"
         android:textSize="20sp" />
 
     <TextView
@@ -91,7 +91,7 @@ tools:context=".customer.BookingDetailActivity">
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/fira_sans_bold"
         android:text="Tên khách sạn"
-        android:textColor="#8DD6F8"
+        android:textColor="@color/black"
         android:textSize="28sp" />
 
     <TextView
@@ -101,7 +101,7 @@ tools:context=".customer.BookingDetailActivity">
         android:layout_marginTop="10dp"
         android:fontFamily="@font/fira_sans_bold"
         android:text="Địa chỉ khách sạn:"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20sp" />
 
     <TextView
@@ -111,7 +111,7 @@ tools:context=".customer.BookingDetailActivity">
         android:fontFamily="@font/roboto"
         android:gravity="end"
         android:text="Địa chỉ chi tiết"
-        android:textColor="@color/green_200"
+        android:textColor="@color/black"
         android:textSize="20sp" />
 
     <TextView
@@ -121,7 +121,7 @@ tools:context=".customer.BookingDetailActivity">
         android:layout_marginTop="10dp"
         android:fontFamily="@font/fira_sans_bold"
         android:text="Thuộc địa phận:"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20sp" />
 
     <TextView
@@ -131,7 +131,7 @@ tools:context=".customer.BookingDetailActivity">
         android:fontFamily="@font/fira_sans_bold"
         android:gravity="end"
         android:text="Tỉnh"
-        android:textColor="@color/green_200"
+        android:textColor="@color/black"
         android:textSize="22sp" />
 
     <TextView
@@ -142,7 +142,7 @@ tools:context=".customer.BookingDetailActivity">
         android:fontFamily="@font/fira_sans_bold"
         android:text="Hình ảnh mô tả:"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="18sp" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -160,8 +160,8 @@ tools:context=".customer.BookingDetailActivity">
         android:fontFamily="@font/fira_sans_bold"
         android:text="@string/amenities"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:textSize="20sp" />
 
     <LinearLayout
@@ -177,8 +177,8 @@ tools:context=".customer.BookingDetailActivity">
             android:clickable="false"
             android:gravity="top"
             android:text="@string/pool"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="18sp" />
 
         <CheckBox
@@ -189,8 +189,8 @@ tools:context=".customer.BookingDetailActivity">
             android:clickable="false"
             android:gravity="top"
             android:text="@string/wifi"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="18sp" />
 
         <CheckBox
@@ -202,8 +202,8 @@ tools:context=".customer.BookingDetailActivity">
             android:clickable="false"
             android:gravity="top"
             android:text="TV"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="18sp" />
 
         <CheckBox
@@ -215,8 +215,8 @@ tools:context=".customer.BookingDetailActivity">
             android:clickable="false"
             android:gravity="top"
             android:text="24/7"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="18sp" />
 
         <!-- Add more CheckBoxes for other amenities as needed -->
@@ -232,7 +232,7 @@ tools:context=".customer.BookingDetailActivity">
             android:layout_height="wrap_content"
             android:fontFamily="@font/fira_sans_bold"
             android:text="Số lượng phòng đặt:"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
@@ -242,7 +242,7 @@ tools:context=".customer.BookingDetailActivity">
             android:fontFamily="@font/fira_sans"
             android:gravity="end"
             android:text="phòng"
-            android:textColor="#EFD687"
+            android:textColor="@color/black"
             android:textSize="20sp" />
     </LinearLayout>
     <LinearLayout
@@ -257,7 +257,7 @@ tools:context=".customer.BookingDetailActivity">
             android:layout_height="wrap_content"
             android:fontFamily="@font/fira_sans_bold"
             android:text="Số lượng người lớn:"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
@@ -267,7 +267,7 @@ tools:context=".customer.BookingDetailActivity">
             android:fontFamily="@font/fira_sans"
             android:gravity="end"
             android:text="người"
-            android:textColor="#EFD687"
+            android:textColor="@color/black"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -283,7 +283,7 @@ tools:context=".customer.BookingDetailActivity">
             android:layout_height="wrap_content"
             android:fontFamily="@font/fira_sans_bold"
             android:text="Số lượng trẻ nhỏ:"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
@@ -293,7 +293,7 @@ tools:context=".customer.BookingDetailActivity">
             android:fontFamily="@font/fira_sans"
             android:gravity="end"
             android:text="trẻ"
-            android:textColor="#EFD687"
+            android:textColor="@color/black"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -306,7 +306,7 @@ tools:context=".customer.BookingDetailActivity">
         android:gravity="right"
         android:text="Giá phòng mỗi đêm"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/green_200"
+        android:textColor="@color/black"
         android:textSize="20sp" />
 
     <LinearLayout
@@ -325,7 +325,7 @@ tools:context=".customer.BookingDetailActivity">
             android:gravity="center"
             android:text="VND"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/green_200"
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
@@ -337,8 +337,8 @@ tools:context=".customer.BookingDetailActivity">
             android:gravity="right"
             android:hint="VND"
             android:inputType="text"
-            android:textColor="#5AFAE1"
-            android:textColorHint="@color/white"
+            android:textColor="@color/red"
+            android:textColorHint="@color/red"
             android:textSize="24sp" />
     </LinearLayout>
 
@@ -353,7 +353,7 @@ tools:context=".customer.BookingDetailActivity">
         android:layout_height="wrap_content"
         android:fontFamily="@font/fira_sans_bold"
         android:text="Check-in"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20sp" />
 
     <TextView
@@ -363,7 +363,7 @@ tools:context=".customer.BookingDetailActivity">
         android:fontFamily="@font/fira_sans"
         android:gravity="end"
         android:text="date..."
-        android:textColor="#EFD687"
+        android:textColor="@color/black"
         android:textSize="22sp" />
     </LinearLayout>
 
@@ -378,7 +378,7 @@ tools:context=".customer.BookingDetailActivity">
         android:layout_height="wrap_content"
         android:fontFamily="@font/fira_sans_bold"
         android:text="Check-out"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20sp" />
 
     <TextView
@@ -388,7 +388,7 @@ tools:context=".customer.BookingDetailActivity">
         android:fontFamily="@font/fira_sans"
         android:gravity="end"
         android:text="date..."
-        android:textColor="#EFD687"
+        android:textColor="@color/black"
         android:textSize="22sp" />
     </LinearLayout>
 
@@ -401,7 +401,7 @@ tools:context=".customer.BookingDetailActivity">
         android:gravity="right"
         android:text="Tổng chi phí"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#F17676"
+        android:textColor="@color/black"
         android:textSize="20sp" />
 
     <LinearLayout
@@ -420,7 +420,7 @@ tools:context=".customer.BookingDetailActivity">
             android:gravity="center"
             android:text="VND"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="#F17676"
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
@@ -432,8 +432,8 @@ tools:context=".customer.BookingDetailActivity">
             android:gravity="right"
             android:hint="VND"
             android:inputType="text"
-            android:textColor="#5AFAE1"
-            android:textColorHint="@color/white"
+            android:textColor="@color/red"
+            android:textColorHint="@color/red"
             android:textSize="24sp" />
     </LinearLayout>
 
@@ -444,7 +444,7 @@ tools:context=".customer.BookingDetailActivity">
         android:layout_marginTop="20dp"
         android:fontFamily="@font/fira_sans_bold"
         android:text="Quản lý khách sạn:"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20sp" />
 
     <TextView
@@ -455,7 +455,7 @@ tools:context=".customer.BookingDetailActivity">
         android:layout_marginBottom="5dp"
         android:fontFamily="@font/fira_sans_bold"
         android:text="Họ tên:"
-        android:textColor="@color/lavender"
+        android:textColor="@color/black"
         android:textSize="22sp" />
 
     <TextView
@@ -465,7 +465,7 @@ tools:context=".customer.BookingDetailActivity">
         android:layout_marginBottom="5dp"
         android:fontFamily="@font/fira_sans"
         android:text="Số điện thoại:"
-        android:textColor="@color/lavender"
+        android:textColor="@color/black"
         android:textSize="20sp" />
 
     <TextView
@@ -475,7 +475,7 @@ tools:context=".customer.BookingDetailActivity">
         android:layout_marginBottom="5dp"
         android:fontFamily="@font/fira_sans"
         android:text="Email:"
-        android:textColor="@color/lavender"
+        android:textColor="@color/black"
         android:textSize="20sp" />
 
     <Button

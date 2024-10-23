@@ -5,7 +5,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:id="@+id/main"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:background="@color/Dark"
+android:background="@drawable/background"
 tools:context=".owner.HotelPostingActivity">
 
 <LinearLayout
@@ -22,8 +22,8 @@ tools:context=".owner.HotelPostingActivity">
         android:fontFamily="@font/fira_sans_bold"
         android:hint="@string/hotel_name"
         android:inputType="text"
-        android:textColor="#FFFFFF"
-        android:textColorHint="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:textSize="20sp" />
 
     <EditText
@@ -34,8 +34,8 @@ tools:context=".owner.HotelPostingActivity">
         android:fontFamily="@font/fira_sans_bold"
         android:hint="@string/hotel_address"
         android:inputType="textPostalAddress"
-        android:textColor="#FFFFFF"
-        android:textColorHint="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:textSize="20sp" />
 
     <Spinner
@@ -43,7 +43,7 @@ tools:context=".owner.HotelPostingActivity">
         android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_marginTop="10dp"
-        android:background="#FFFFFF" />
+        android:background="#FFFFFF"/>
 
     <TextView
         android:id="@+id/textViewSelectImages"
@@ -53,7 +53,7 @@ tools:context=".owner.HotelPostingActivity">
         android:fontFamily="@font/fira_sans_bold"
         android:text="@string/select_images"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20sp" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -69,7 +69,7 @@ tools:context=".owner.HotelPostingActivity">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/green_500"
+        android:backgroundTint="#3249ab"
         android:fontFamily="@font/fira_sans_bold"
         android:text="Chọn ảnh"
         android:textSize="20sp" />
@@ -81,8 +81,8 @@ tools:context=".owner.HotelPostingActivity">
         android:fontFamily="@font/fira_sans_bold"
         android:text="@string/amenities"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:textSize="20sp" />
 
     <LinearLayout
@@ -97,8 +97,8 @@ tools:context=".owner.HotelPostingActivity">
             android:layout_marginTop="20dp"
             android:gravity="top"
             android:text="@string/pool"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="18sp" />
 
         <CheckBox
@@ -107,9 +107,9 @@ tools:context=".owner.HotelPostingActivity">
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="top"
-            android:text="@string/wifi"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:text="Wifi"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="18sp" />
 
         <CheckBox
@@ -120,8 +120,8 @@ tools:context=".owner.HotelPostingActivity">
             android:layout_weight="1"
             android:gravity="top"
             android:text="TV"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="18sp" />
 
         <CheckBox
@@ -132,8 +132,8 @@ tools:context=".owner.HotelPostingActivity">
             android:layout_weight="1"
             android:gravity="top"
             android:text="24/7"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="18sp" />
 
         <!-- Add more CheckBoxes for other amenities as needed -->
@@ -147,7 +147,8 @@ tools:context=".owner.HotelPostingActivity">
         android:fontFamily="@font/fira_sans_bold"
         android:text="Số lượng phòng"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:textSize="20sp" />
 
     <Spinner
@@ -167,7 +168,7 @@ tools:context=".owner.HotelPostingActivity">
         android:fontFamily="@font/fira_sans_bold"
         android:text="Sức chứa"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20sp" />
 
     <Spinner
@@ -187,7 +188,7 @@ tools:context=".owner.HotelPostingActivity">
         android:gravity="right"
         android:text="Giá phòng mỗi đêm"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/green_200"
+        android:textColor="@color/black"
         android:textSize="20sp" />
 
     <LinearLayout
@@ -205,7 +206,7 @@ tools:context=".owner.HotelPostingActivity">
             android:gravity="center"
             android:text="VND"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/green_200"
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <EditText
@@ -217,8 +218,8 @@ tools:context=".owner.HotelPostingActivity">
             android:gravity="right"
             android:hint="VND"
             android:inputType="text"
-            android:textColor="@color/lavender"
-            android:textColorHint="@color/white"
+            android:textColor="@color/red"
+            android:textColorHint="@color/red"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -230,7 +231,7 @@ tools:context=".owner.HotelPostingActivity">
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/green_700"
         android:fontFamily="@font/fira_sans_bold"
-        android:text="@string/submit"
+        android:text="Thêm"
         android:textSize="20sp" />
 
     <View

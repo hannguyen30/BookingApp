@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#080B13"
+    android:background="@drawable/background"
     tools:context=".customer.HotelListActivity">
 
     <ListView
@@ -19,17 +19,16 @@
         android:cacheColorHint="#F3E5E5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.88"
-        tools:listitem="@layout/item_hotel">
-    </ListView>
+        tools:listitem="@layout/item_hotel"></ListView>
 
     <TextView
         android:id="@+id/txtv_emptyIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="(≥o≤)"
         android:textColor="@color/lavender"
         android:textSize="80sp"
         android:visibility="gone"
@@ -44,7 +43,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/lobster"
-        android:text="Trống trơn luôn!"
         android:textColor="@color/lavender"
         android:textSize="50sp"
         android:visibility="gone"
@@ -69,17 +67,20 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/imageView3"
-            android:layout_width="376dp"
-            android:layout_height="73dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:fontFamily="@font/fira_sans_bold"
+            android:text="Hotel Booking"
+            android:layout_marginTop="0dp"
+            android:textColor="@color/white"
+            android:textSize="34sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/app" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btn_provinceName"
@@ -87,11 +88,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="#080B13"
-            android:fontFamily="@font/fira_sans_light"
+            android:backgroundTint="#E8E8E8"
+            android:fontFamily="@font/fira_sans_bold"
             android:gravity="center|start"
             android:text="Nhập điểm đến của bạn"
             android:textSize="16sp"
+            android:textColor="@color/black"
             app:icon="@drawable/search_24px"
             app:iconGravity="start"
             app:iconPadding="35dp"
@@ -103,11 +105,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="#080B13"
-            android:fontFamily="@font/fira_sans"
+            android:backgroundTint="#E8E8E8"
+            android:fontFamily="@font/fira_sans_bold"
             android:gravity="center|start"
             android:text="1 phòng - 1 người lớn - 0 trẻ em"
             android:textSize="16sp"
+            android:textColor="@color/black"
             app:icon="@drawable/groups_24px"
             app:iconPadding="35dp"
             app:iconSize="28dp" />

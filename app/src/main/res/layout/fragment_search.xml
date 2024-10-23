@@ -4,7 +4,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:background="#080B13"
+android:background="@drawable/background"
 tools:context=".fragments.SearchFragment">
 
 <LinearLayout
@@ -14,21 +14,23 @@ tools:context=".fragments.SearchFragment">
     android:layout_marginLeft="10dp"
     android:layout_marginTop="35dp"
     android:layout_marginRight="10dp"
-    android:background="#080B13"
     android:gravity="center"
     android:orientation="vertical"
     android:weightSum="4">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/imageView3"
-        android:layout_width="409dp"
-        android:layout_height="85dp"
-        android:layout_weight="1"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/fira_sans_bold"
+        android:text="Hotel Booking"
+        android:layout_marginTop="0dp"
+        android:textColor="@color/white"
+        android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/app" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_provinceSearch"
@@ -36,15 +38,17 @@ tools:context=".fragments.SearchFragment">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:backgroundTint="#080B13"
-        android:fontFamily="@font/fira_sans_light"
+        android:backgroundTint="#E8E8E8"
+        android:fontFamily="@font/fira_sans_bold"
         android:gravity="center|start"
         android:text="Nhập điểm đến của bạn"
         android:textSize="17sp"
+        android:textColor="@color/black"
         app:icon="@drawable/search_24px"
         app:iconGravity="start"
         app:iconPadding="35dp"
-        app:iconSize="28dp" />
+        app:iconSize="28dp"
+        />
 
     <Button
         android:id="@+id/btn_people"
@@ -52,11 +56,12 @@ tools:context=".fragments.SearchFragment">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:backgroundTint="#080B13"
-        android:fontFamily="@font/fira_sans"
+        android:backgroundTint="#E8E8E8"
+        android:fontFamily="@font/fira_sans_bold"
         android:gravity="center|start"
         android:text="1 phòng - 1 người lớn - 0 trẻ em"
         android:textSize="17sp"
+        android:textColor="@color/black"
         app:icon="@drawable/groups_24px"
         app:iconPadding="35dp"
         app:iconSize="28dp" />
@@ -73,69 +78,59 @@ tools:context=".fragments.SearchFragment">
         android:text="Tìm kiếm"
         android:textSize="20sp" />
 
+
+
 </LinearLayout>
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="403dp"
-    android:layout_gravity="bottom|center"
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="40dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginBottom="20dp"
-    android:orientation="vertical">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:fontFamily="@font/fira_sans_bold"
-        android:gravity="center"
-        android:text="Khám phá điểm đến mới"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp" />
-
-    <ViewFlipper
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_gravity="center"
+        android:layout_height="357dp"
+        android:layout_gravity="bottom|center"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginRight="10dp"
-        android:autoStart="true"
-        android:flipInterval="2500"
-        android:inAnimation="@android:anim/slide_in_left"
-        android:outAnimation="@android:anim/slide_out_right">
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
 
-
-        <ImageView
-            android:id="@+id/imageView0"
-            android:layout_width="351dp"
-            android:layout_height="65dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/app" />
-
-        <ImageView
-            android:id="@+id/imageView"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/_004365" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/fira_sans_bold"
+            android:gravity="center"
+            android:text="Khám phá điểm đến mới"
+            android:textColor="@color/Cold_Blue"
+            android:textSize="20sp" />
 
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ViewFlipper
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
             android:layout_gravity="center"
-            android:src="@drawable/your_name_2" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:autoStart="true"
+            android:flipInterval="2500"
+            android:inAnimation="@android:anim/slide_in_left"
+            android:outAnimation="@android:anim/slide_out_right">
 
-    </ViewFlipper>
-</LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/_004365" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/your_name_2" />
+
+        </ViewFlipper>
+    </LinearLayout>
 </FrameLayout>

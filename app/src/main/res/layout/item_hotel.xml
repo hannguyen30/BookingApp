@@ -93,6 +93,7 @@
                     android:fontFamily="@font/fira_sans_bold"
                     android:gravity="center|right"
                     android:text="VND 100.000/Đêm"
+                    android:textColor="@color/red"
                     android:textSize="20sp" />
 
                 <TextView

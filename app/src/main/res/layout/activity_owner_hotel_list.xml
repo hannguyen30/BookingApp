@@ -41,7 +41,6 @@ tools:context=".owner.HotelListActivity">
         android:id="@+id/txtv_emptyIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="(≥o≤)"
         android:textColor="@color/lavender"
         android:textSize="80sp"
         android:visibility="gone"

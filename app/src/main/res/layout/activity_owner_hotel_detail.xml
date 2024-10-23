@@ -5,7 +5,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:id="@+id/main"
 android:layout_width="match_parent"
 android:layout_height="wrap_content"
-android:background="@color/Dark"
+android:background="@drawable/background"
 tools:context=".owner.HotelDetailActivity">
 
 <LinearLayout
@@ -22,8 +22,8 @@ tools:context=".owner.HotelDetailActivity">
         android:fontFamily="@font/fira_sans_bold"
         android:hint="@string/hotel_name"
         android:inputType="text"
-        android:textColor="#FFFFFF"
-        android:textColorHint="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:textSize="20sp" />
 
     <EditText
@@ -34,8 +34,8 @@ tools:context=".owner.HotelDetailActivity">
         android:fontFamily="@font/fira_sans_bold"
         android:hint="@string/hotel_address"
         android:inputType="textPostalAddress"
-        android:textColor="#FFFFFF"
-        android:textColorHint="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:textSize="20sp" />
 
     <Spinner
@@ -53,7 +53,7 @@ tools:context=".owner.HotelDetailActivity">
         android:fontFamily="@font/fira_sans_bold"
         android:text="@string/select_images"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="18sp" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -70,7 +70,7 @@ tools:context=".owner.HotelDetailActivity">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/green_500"
+        android:backgroundTint="#324aae"
         android:fontFamily="@font/fira_sans_bold"
         android:text="Chọn ảnh"
         android:textSize="20sp" />
@@ -82,8 +82,8 @@ tools:context=".owner.HotelDetailActivity">
         android:fontFamily="@font/fira_sans_bold"
         android:text="@string/amenities"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:textSize="20sp" />
 
     <LinearLayout
@@ -98,8 +98,8 @@ tools:context=".owner.HotelDetailActivity">
             android:layout_marginTop="20dp"
             android:gravity="top"
             android:text="@string/pool"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="18sp" />
 
         <CheckBox
@@ -109,8 +109,8 @@ tools:context=".owner.HotelDetailActivity">
             android:layout_marginTop="20dp"
             android:gravity="top"
             android:text="@string/wifi"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="18sp" />
 
         <CheckBox
@@ -121,8 +121,8 @@ tools:context=".owner.HotelDetailActivity">
             android:layout_weight="1"
             android:gravity="top"
             android:text="TV"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="18sp" />
 
         <CheckBox
@@ -133,8 +133,8 @@ tools:context=".owner.HotelDetailActivity">
             android:layout_weight="1"
             android:gravity="top"
             android:text="24/7"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="18sp" />
 
         <!-- Add more CheckBoxes for other amenities as needed -->
@@ -148,7 +148,7 @@ tools:context=".owner.HotelDetailActivity">
         android:fontFamily="@font/fira_sans_bold"
         android:text="Số lượng phòng"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20sp" />
 
     <Spinner
@@ -168,7 +168,7 @@ tools:context=".owner.HotelDetailActivity">
         android:fontFamily="@font/fira_sans_bold"
         android:text="Sức chứa"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20sp" />
 
     <Spinner
@@ -188,7 +188,7 @@ tools:context=".owner.HotelDetailActivity">
         android:gravity="right"
         android:text="Giá phòng mỗi đêm"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/green_200"
+        android:textColor="@color/black"
         android:textSize="20sp" />
 
     <LinearLayout
@@ -206,7 +206,7 @@ tools:context=".owner.HotelDetailActivity">
             android:gravity="center"
             android:text="VND"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/green_200"
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <EditText
@@ -218,8 +218,8 @@ tools:context=".owner.HotelDetailActivity">
             android:gravity="right"
             android:hint="VND"
             android:inputType="text"
-            android:textColor="@color/lavender"
-            android:textColorHint="@color/white"
+            android:textColor="#5AFAE1"
+            android:textColorHint="@color/black"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -229,7 +229,7 @@ tools:context=".owner.HotelDetailActivity">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:backgroundTint="?android:attr/colorActivatedHighlight"
+        android:backgroundTint="#324AAE"
         android:fontFamily="@font/fira_sans_bold"
         android:text="Hoàn tất chỉnh sửa"
         android:textSize="20sp" />

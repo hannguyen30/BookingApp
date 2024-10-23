@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "project.tttn.vuhoangnam_20h1120232_hotelbookingapp"
+    namespace = "project.example.app"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "project.tttn.vuhoangnam_20h1120232_hotelbookingapp"
+        applicationId = "project.example.app"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
@@ -59,4 +59,5 @@ dependencies {
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
     implementation("com.squareup.picasso:picasso:2.71828")
     implementation("com.google.android.material:material:1.12.0")
+    implementation("com.airbnb.android:lottie:3.4.0")
 }

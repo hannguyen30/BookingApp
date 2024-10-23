@@ -27,7 +27,6 @@
             android:layout_gravity="center|center_horizontal|center_vertical"
             android:layout_marginTop="260dp"
             android:gravity="center|center_horizontal|center_vertical"
-            android:text="(≥o≤)"
             android:textColor="@color/lavender"
             android:textSize="80sp"
             android:visibility="gone" />
@@ -39,7 +38,6 @@
             android:layout_gravity="center|center_horizontal|center_vertical"
             android:fontFamily="@font/lobster"
             android:gravity="center|center_horizontal|center_vertical"
-            android:text="Trống trơn luôn!"
             android:textColor="@color/lavender"
             android:textSize="50sp"
             android:visibility="gone" />

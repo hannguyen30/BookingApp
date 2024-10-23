@@ -4,9 +4,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:background="@color/Dark"
+android:background="@drawable/background"
 android:id="@+id/main"
-android:backgroundTint="@color/Dark"
 tools:context=".owner.HomeActivity">
 
     <View
@@ -14,23 +13,24 @@ tools:context=".owner.HomeActivity">
         android:layout_width="443dp"
         android:layout_height="143dp"
         android:background="@drawable/custom_rectangle"
-        android:backgroundTint="@color/Dark_blue"
+        android:backgroundTint="#3249AB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<ImageView
-    android:id="@+id/textView"
-    android:layout_width="296dp"
-    android:layout_height="73dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginTop="4dp"
-    android:gravity="center_horizontal"
-    android:letterSpacing="0.025"
-    android:src="@drawable/app"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
-
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/fira_sans_bold"
+        android:text="Hotel Booking"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <ImageButton
         android:id="@+id/btn_ownerlogout"
         android:layout_width="wrap_content"
@@ -60,7 +60,7 @@ tools:context=".owner.HomeActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/txtv_ownerFullName"
@@ -70,7 +70,8 @@ tools:context=".owner.HomeActivity">
             android:layout_marginTop="16dp"
             android:text="Full Name"
             android:textAllCaps="true"
-            android:textColor="@color/green_500"
+
+            android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +95,7 @@ tools:context=".owner.HomeActivity">
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="EDIT PROFILE"
-            android:textColor="@color/green_500"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtv_ownerEmail"
             tools:ignore="MissingConstraints" />
@@ -103,14 +104,14 @@ tools:context=".owner.HomeActivity">
             android:id="@+id/iv_avatar"
             android:layout_width="90dp"
             android:layout_height="90dp"
-            android:padding="8dp"
             android:layout_marginEnd="16dp"
+            android:padding="8dp"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/circle"
-            app:strokeColor="@color/green_200"
+            app:strokeColor="@color/Cold_Blue"
             app:strokeWidth="5dp"
             tools:srcCompat="@tools:sample/avatars" />
 
@@ -145,7 +146,8 @@ tools:context=".owner.HomeActivity">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:id="@+id/gotoOwnerHotelList"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#FFE2E1">
 
             <ImageView
                 android:id="@+id/image_view1"
@@ -157,7 +159,7 @@ tools:context=".owner.HomeActivity">
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/green_700" />
+                app:tint="@color/red" />
 
             <TextView
                 android:id="@+id/textView1"
@@ -166,7 +168,7 @@ tools:context=".owner.HomeActivity">
                 android:gravity="center"
                 android:text="Khách sạn"
                 android:textAllCaps="true"
-                android:textColor="@color/green_500"
+                android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -194,7 +196,8 @@ tools:context=".owner.HomeActivity">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:id="@+id/gotoOwnerBookingslList"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#FCF4D9">
 
             <ImageView
                 android:id="@+id/image_view20"
@@ -206,7 +209,7 @@ tools:context=".owner.HomeActivity">
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/green_700" />
+                app:tint="#FDD15E" />
 
             <TextView
                 android:id="@+id/textView20"
@@ -215,7 +218,7 @@ tools:context=".owner.HomeActivity">
                 android:gravity="center"
                 android:text="Bookings"
                 android:textAllCaps="true"
-                android:textColor="@color/green_500"
+                android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -271,7 +274,7 @@ tools:context=".owner.HomeActivity">
                 android:fontFamily="@font/fira_sans_bold"
                 android:gravity="center"
                 android:text="Lên ý tưởng cho Homestay của bạn"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/black"
                 android:textSize="20sp" />
 
             <ViewFlipper
@@ -286,17 +289,6 @@ tools:context=".owner.HomeActivity">
                 android:inAnimation="@android:anim/slide_in_left"
                 android:outAnimation="@android:anim/slide_out_right">
 
-                <ImageView
-                    android:id="@+id/imageView0"
-                    android:layout_width="351dp"
-                    android:layout_height="65dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/app" />
 
                 <ImageView
                     android:id="@+id/imageView1"

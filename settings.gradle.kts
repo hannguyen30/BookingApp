@@ -8,6 +8,9 @@ pluginManagement {
             }
         }
         mavenCentral()
+        maven {
+            url = uri("https://jitpack.io")
+        }
         gradlePluginPortal()
     }
 }
@@ -19,6 +22,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "VuHoangNam_20H1120232_HotelBookingApp"
+rootProject.name = "HotelBooking"
 include(":app")
  

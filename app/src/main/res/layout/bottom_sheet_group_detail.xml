@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dialogbg"
+    android:background="@drawable/background"
     android:orientation="vertical">
 
     <ImageView
@@ -27,7 +27,7 @@
             android:padding="8dp"
             android:text="Chọn phòng và khách"
             android:textAlignment="viewStart"
-            android:textColor="@color/lavender"
+            android:textColor="@color/black"
             android:textSize="25dp" />
 
         <ImageView
@@ -56,7 +56,7 @@
             android:layout_marginLeft="30dp"
             android:layout_weight="12"
             android:text="Phòng"
-            android:textColor="@color/lavender"
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <Button
@@ -68,7 +68,7 @@
             android:fontFamily="@font/fira_sans"
             android:gravity="center"
             android:text="-"
-            android:textColor="@color/Dark"
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
@@ -109,7 +109,7 @@
             android:layout_marginLeft="30dp"
             android:layout_weight="12"
             android:text="Người lớn"
-            android:textColor="@color/lavender"
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <Button
@@ -165,7 +165,7 @@
             android:layout_marginLeft="30dp"
             android:layout_weight="12"
             android:text="Trẻ em"
-            android:textColor="@color/lavender"
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <Button
@@ -207,7 +207,7 @@
         android:id="@+id/btn_peopleDone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/lavender"
+        android:backgroundTint="#3249AB"
         android:text="Xong"
         android:textColor="#FFFFFF"
         android:textColorLink="#FFFFFF"

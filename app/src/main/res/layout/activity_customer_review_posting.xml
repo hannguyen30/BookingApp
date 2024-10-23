@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Dark"
+    android:background="@drawable/background"
     tools:context=".customer.ReviewPostingActivity">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -33,11 +33,11 @@
         android:layout_width="400dp"
         android:layout_height="245dp"
         android:layout_marginTop="16dp"
-        android:background="@color/Dark_blue"
+        android:background="@color/white"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        android:textColor="@color/white"
+        android:textColor="#909090"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
@@ -50,7 +50,7 @@
         android:layout_marginEnd="95dp"
         android:fontFamily="@font/fira_sans_bold"
         android:text="guest01@gmail.com"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="86dp"
         android:numStars="5"
-        android:outlineSpotShadowColor="@color/white"
+        android:outlineSpotShadowColor="@color/black"
         android:progressTint="@color/Cold_Blue"
         android:stepSize="1"
         app:layout_constraintEnd_toEndOf="parent"
