@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "555102080338",
+    "firebase_url": "https://bookingapp-a5ef6-default-rtdb.firebaseio.com",
+    "project_id": "bookingapp-a5ef6",
+    "storage_bucket": "bookingapp-a5ef6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555102080338:android:a01c31d0ee238b31adbe8b",
+        "android_client_info": {
+          "package_name": "project.example.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTNlL9Z5XcqhdFpcSceFR3PggnP-aYvZg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
