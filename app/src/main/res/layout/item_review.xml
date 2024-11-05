@@ -13,7 +13,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
-        android:background="#1A77A8"
+        android:background="@color/Cold_Blue"
         android:orientation="horizontal">
 
     <LinearLayout

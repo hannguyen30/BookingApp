@@ -88,7 +88,8 @@ public class CreateBookingActivity extends AppCompatActivity {
                 intent.getIntExtra("hotelNumMaxGuest", 0),
                 intent.getIntExtra("hotelPrice", 0),
                 intent.getIntExtra("hotelNumReviews", 0),
-                intent.getIntExtra("hotelRate", 0)
+                intent.getIntExtra("hotelRate", 0),
+                intent.getBooleanExtra("isVariable",true)
         );
 
         CurrentGroupDetail currentGroupDetail = CurrentGroupDetail.getInstance();
@@ -190,10 +191,23 @@ public class CreateBookingActivity extends AppCompatActivity {
         });
 
         btn_cancelBooking.setOnClickListener(v -> {
-            Intent newIntent = new Intent(CreateBookingActivity.this, HomeActivity.class);
-            startActivity(newIntent);
-            finish();
+            // Cập nhật trạng thái phòng thành còn phòng
+            firebaseHelper.updateHotelAvailability(selectedHotel.getId(), true, new FirebaseHelper.AvailabilityUpdateCallback() {
+                @Override
+                public void onSuccess() {
+                    Toast.makeText(CreateBookingActivity.this, "Hủy đặt phòng thành công và đã cập nhật trạng thái phòng!", Toast.LENGTH_SHORT).show();
+                    Intent newIntent = new Intent(CreateBookingActivity.this, HomeActivity.class);
+                    startActivity(newIntent);
+                    finish();
+                }
+
+                @Override
+                public void onError(Exception e) {
+                    Toast.makeText(CreateBookingActivity.this, "Hủy đặt phòng thành công nhưng không thể cập nhật trạng thái phòng: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         });
+
 
     }
 

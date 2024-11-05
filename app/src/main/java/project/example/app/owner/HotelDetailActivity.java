@@ -58,7 +58,7 @@ public class HotelDetailActivity extends AppCompatActivity {
     private EditText editTextHotelName, editTextHotelAddress, editTextPrice;
     private Spinner spinnerProv, spinnerNumRooms, spinnerMaxGuests;
     private Button btnEditHotel, btnAddImage, btnRemoveHotel;
-    private CheckBox checkBoxPool, checkBoxWifi, checkBoxTV, checkBox24;
+    private CheckBox checkBoxPool, checkBoxWifi, checkBoxTV, checkBox24, isAvailble;
     private Hotel selectedHotel;
     private ReviewAdapter reviewAdapter;
     private ArrayList<Review> reviews;
@@ -86,6 +86,7 @@ public class HotelDetailActivity extends AppCompatActivity {
         recyclerViewImages = findViewById(R.id.recyclerView_editImages);
         btnAddImage = findViewById(R.id.btn_editImageSelecting);
         editTextPrice = findViewById(R.id.etxt_editPrice);
+        isAvailble = findViewById(R.id.checkBoxAvailable);
         ListView lvw_reviews = findViewById(R.id.lvw_reviews);
 
         Intent intent = getIntent();
@@ -102,9 +103,14 @@ public class HotelDetailActivity extends AppCompatActivity {
                 intent.getIntExtra("hotelNumMaxGuest", 0),
                 intent.getIntExtra("hotelPrice", 0),
                 intent.getIntExtra("hotelNumReviews", 0),
-                intent.getIntExtra("hotelRate", 0)
+                intent.getIntExtra("hotelRate", 0),
+                intent.getBooleanExtra("isAvailable",true)
         );
-
+        if(selectedHotel.isAvailable()==true){
+            isAvailble.setChecked(true);
+        }else{
+            isAvailble.setChecked(false);
+        }
         int posit = Integer.parseInt(selectedHotel.getProvinceID().substring("province".length()));
         ArrayList<String> imageUrlList = new ArrayList<>(Arrays.asList(selectedHotel.getImageUrls().split(",")));
 
@@ -124,7 +130,10 @@ public class HotelDetailActivity extends AppCompatActivity {
         reviewAdapter = new ReviewAdapter(this, R.layout.item_review, reviews);
         lvw_reviews.setAdapter(reviewAdapter);
         loadReviews(selectedHotel.getId());
-
+        isAvailble.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            // Cập nhật giá trị isAvailable trong đối tượng selectedHotel
+            selectedHotel.setAvailable(isChecked);
+        });
     }
 
     private void loadReviews(String hotelId){
@@ -225,6 +234,7 @@ public class HotelDetailActivity extends AppCompatActivity {
         int numberOfRooms = Integer.parseInt(spinnerNumRooms.getSelectedItem().toString());
         int maxGuestsPerRoom = Integer.parseInt(spinnerMaxGuests.getSelectedItem().toString());
         int price = parsePriceFromEditText(editTextPrice);
+        boolean isAvailable = isAvailble.isChecked();
 
         // Lấy danh sách các URL của hình ảnh từ adapter
         List<String> tempUrls = imageAdapter.getImageUrls(); // Lấy danh sách tạm thời từ adapter
@@ -268,7 +278,7 @@ public class HotelDetailActivity extends AppCompatActivity {
 
                                 // Nếu đã tải lên tất cả các ảnh, tiến hành cập nhật thông tin khách sạn
                                 if (latch.getCount() == 0) {
-                                    updateHotelInfoInDatabase(hotelId, hotelName, address, provinceID, amenities, finalImageUrls, numberOfRooms, maxGuestsPerRoom, price);
+                                    updateHotelInfoInDatabase(hotelId, hotelName, address, provinceID, amenities, finalImageUrls, numberOfRooms, maxGuestsPerRoom, price, isAvailable);
                                 }
                             });
                         }).addOnFailureListener(exception -> {
@@ -287,17 +297,17 @@ public class HotelDetailActivity extends AppCompatActivity {
             executorService.shutdown();
         } else {
             // Nếu không có ảnh mới để tải lên, trực tiếp cập nhật thông tin khách sạn
-            updateHotelInfoInDatabase(hotelId, hotelName, address, provinceID, amenities, finalImageUrls, numberOfRooms, maxGuestsPerRoom, price);
+            updateHotelInfoInDatabase(hotelId, hotelName, address, provinceID, amenities, finalImageUrls, numberOfRooms, maxGuestsPerRoom, price,isAvailable);
         }
     }
 
-    private void updateHotelInfoInDatabase(String hotelId, String hotelName, String address, String provinceID, String amenities, List<String> finalImageUrls, int numberOfRooms, int maxGuestsPerRoom, int price) {
+    private void updateHotelInfoInDatabase(String hotelId, String hotelName, String address, String provinceID, String amenities, List<String> finalImageUrls, int numberOfRooms, int maxGuestsPerRoom, int price, boolean isAvailable) {
         String imageUrlsString = TextUtils.join(",", finalImageUrls);
         CurrentUserManager currentUserManager = CurrentUserManager.getInstance();
         String ownerId = currentUserManager.getUserId(); // Lấy ID của người dùng hiện tại
 
         // Gọi hàm updateHotel() để cập nhật thông tin về khách sạn trong cơ sở dữ liệu
-        firebaseHelper.updateHotel(hotelId, ownerId, hotelName, address, provinceID, amenities, imageUrlsString, numberOfRooms, maxGuestsPerRoom, price, new FirebaseHelper.HotelUpdateCallback() {
+        firebaseHelper.updateHotel(hotelId, ownerId, hotelName, address, provinceID, amenities, imageUrlsString, numberOfRooms, maxGuestsPerRoom, price, isAvailable, new FirebaseHelper.HotelUpdateCallback() {
             @Override
             public void onSuccess() {
                 // Xử lý khi cập nhật thông tin khách sạn thành công

@@ -18,7 +18,7 @@ import project.example.app.data.FirebaseHelper;
 
 public class IntroActivity extends AppCompatActivity {
 
-    private static final long INTRO_DELAY = 5000;
+    private static final long INTRO_DELAY = 4000;
     private static final int REQUEST_CODE_READ_EXTERNAL_STORAGE = 101;
 
     @Override

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:outlineSpotShadowColor="@color/black">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,16 +15,21 @@
         android:layout_marginBottom="10dp">
 
 
-        <ImageView
-            android:id="@+id/imgvw_cover"
-            android:layout_width="380dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:scaleType="centerCrop"
-            tools:srcCompat="@drawable/_004365" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="350dp"
+            android:layout_height="330dp"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp">
+
+            <ImageView
+                android:id="@+id/imgvw_cover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/_004365" />
+
+        </androidx.cardview.widget.CardView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,22 +38,56 @@
             android:orientation="vertical"
             android:weightSum="4">
 
-            <TextView
-                android:id="@+id/tv_hotelname"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="82dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
-                android:fontFamily="@font/fira_sans_bold"
-                android:text="Tên khách sạn nằm ở đây"
-                android:textSize="22sp" />
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp">
+
+                <TextView
+                    android:id="@+id/tv_hotelname"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/fira_sans_bold"
+                    android:text="Tên khách sạn nằm ở đây"
+                    android:textSize="22sp" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp">
+                <TextView
+                    android:id="@+id/tv_room1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Tình trạng:"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/fira_sans_medium"/>
+                <TextView
+                    android:id="@+id/tv_room_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Còn phòng"
+                    android:textColor="@color/green_500"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/fira_sans_medium"/>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="37dp"
                 android:orientation="horizontal">
-
                 <TextView
                     android:id="@+id/tv_rate"
                     android:layout_width="69dp"
@@ -67,8 +107,19 @@
                     android:layout_weight="3"
                     android:fontFamily="@font/fira_sans_medium"
                     android:text="Số lượng rate" />
-            </LinearLayout>
 
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_Rooms"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/fira_sans_medium"
+                android:text="Số phòng: 10"
+                />
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -79,7 +130,7 @@
                     android:layout_height="74dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:fontFamily="@font/fira_sans_light"
+                    android:fontFamily="@font/fira_sans_bold"
                     android:text="Địa chỉ nằm đây"
                     android:textSize="16sp" />
 

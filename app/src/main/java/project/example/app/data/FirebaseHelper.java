@@ -42,24 +42,29 @@ public class FirebaseHelper {
     }
 
     // Lấy tên tỉnh theo id
-    public void getProvinceNameById(String id, final ProvinceNameCallback callback) {
-        mReferenceProvinces.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+    public void getProvinceNameById(String provinceID, ProvinceNameCallback callback) {
+        DatabaseReference provinceRef = FirebaseDatabase.getInstance().getReference("provinces").child(provinceID);
+        provinceRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    String provinceName = dataSnapshot.child("name").getValue(String.class);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String provinceName = snapshot.child("name").getValue(String.class);
+                    Log.d("FirebaseHelper", "Province found: " + provinceName); // Kiểm tra dữ liệu
                     callback.onCallback(provinceName);
                 } else {
-                    callback.onCallback(null); // Không tìm thấy tỉnh
+                    Log.e("FirebaseHelper", "Province with ID " + provinceID + " does not exist");
+                    callback.onCallback(null);
                 }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                callback.onError(databaseError.toException());
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("FirebaseHelper", "Database error: " + error.getMessage());
+                callback.onError(error.toException());
             }
         });
     }
+
 
     // Phương thức lấy tất cả tên của các tỉnh
     public void getAllProvinceNames(final AllProvinceNamesCallback callback) {
@@ -312,11 +317,11 @@ public class FirebaseHelper {
             }
         });
     }
-    
-    // Phương thức lấy tất cả các khách sạn theo provinceID
-    public void getHotelsByProvinceID(String provinceId, final HotelListCallback callback) {
+
+    //tim ks theo province
+    public void getHotelsByProvinceID(String provinceId, int numRooms, final HotelListCallback callback) {
         // Log provinceId để kiểm tra
-        Log.d("GetHotels", "Tìm khách sạn với provinceId: " + provinceId);
+        Log.d("GetHotels", "Tìm khách sạn với provinceId: " + provinceId + " và số phòng: " + numRooms);
 
         // Lấy dữ liệu từ Firebase theo provinceId
         mReferenceHotels.orderByChild("provinceId").equalTo(provinceId)
@@ -330,7 +335,10 @@ public class FirebaseHelper {
                             for (DataSnapshot hotelSnapshot : dataSnapshot.getChildren()) {
                                 Hotel hotel = hotelSnapshot.getValue(Hotel.class);
                                 if (hotel != null) {
-                                    hotels.add(hotel);
+                                    // Kiểm tra số phòng
+                                    if (hotel.getNumRooms() >= numRooms) {
+                                        hotels.add(hotel);
+                                    }
                                 }
                             }
                             Log.d("LoadHotels", "Số lượng khách sạn tìm thấy: " + hotels.size());
@@ -338,7 +346,7 @@ public class FirebaseHelper {
                             Log.d("LoadHotels", "Không có khách sạn nào tìm thấy với provinceId: " + provinceId);
                         }
 
-                        // Gọi callback với danh sách khách sạn
+                        // Gọi callback với danh sách khách sạn đã lọc
                         callback.onCallback(hotels);
                     }
 
@@ -350,9 +358,31 @@ public class FirebaseHelper {
                     }
                 });
     }
+    //tim theo province hoac ten ks
+    public void getHotelsByProvinceOrName(String query, FirebaseHelper.HotelListCallback callback) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("hotels");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Hotel> hotels = new ArrayList<>();
+                for (DataSnapshot hotelSnapshot : snapshot.getChildren()) {
+                    Hotel hotel = hotelSnapshot.getValue(Hotel.class);
+                    if (hotel != null) { // Kiểm tra hotel không null
+                        if ((hotel.getName() != null && hotel.getName().toLowerCase().contains(query.toLowerCase())) ||
+                                (hotel.getProvinceID() != null && hotel.getProvinceID().toLowerCase().contains(query.toLowerCase()))) {
+                            hotels.add(hotel);
+                        }
+                    }
+                }
+                callback.onCallback(hotels);
+            }
 
-
-
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                callback.onError(error.toException());
+            }
+        });
+    }
 
 
 
@@ -380,7 +410,7 @@ public class FirebaseHelper {
     }
 
     public void addHotel(String ownerId, String hotelName, String address, String provinceID, String amenities,
-                         String imageUrlsString, int numberOfRooms, int maxGuestsPerRoom, int price,
+                         String imageUrlsString, int numberOfRooms, int maxGuestsPerRoom, int price,boolean isAvailable,
                          final HotelAddCallback callback) {
         // Tạo một DatabaseReference mới để thêm khách sạn vào Firebase Realtime Database
         DatabaseReference newHotelRef = mReferenceHotels.push();
@@ -397,6 +427,7 @@ public class FirebaseHelper {
         newHotel.setNumRooms(numberOfRooms);
         newHotel.setNumMaxGuest(maxGuestsPerRoom);
         newHotel.setPrice(price);
+        newHotel.setAvailable(isAvailable);
 
         // Thêm khách sạn vào Firebase Realtime Database
         newHotelRef.setValue(newHotel).addOnCompleteListener(task -> {
@@ -409,7 +440,7 @@ public class FirebaseHelper {
     }
 
     public void updateHotel(String hotelId, String ownerId, String hotelName, String address, String provinceID, String amenities,
-                            String imageUrlsString, int numberOfRooms, int maxGuestsPerRoom, int price,
+                            String imageUrlsString, int numberOfRooms, int maxGuestsPerRoom, int price, boolean isAvailable,
                             final HotelUpdateCallback callback) {
 
         // Tạo một DatabaseReference để trỏ đến khách sạn cần cập nhật
@@ -432,6 +463,7 @@ public class FirebaseHelper {
                     updatedHotel.setNumRooms(numberOfRooms);
                     updatedHotel.setNumMaxGuest(maxGuestsPerRoom);
                     updatedHotel.setPrice(price);
+                    updatedHotel.setAvailable(isAvailable);
 
                     // Cập nhật thông tin của khách sạn vào Firebase Realtime Database
                     hotelRef.setValue(updatedHotel).addOnCompleteListener(task -> {
@@ -633,7 +665,6 @@ public class FirebaseHelper {
         String bookingId = newBookingRef.getKey();
 
         Booking newBooking = new Booking();
-
         newBooking.setId(bookingId);
         newBooking.setStatus("requestConfirm");
         newBooking.setUserId(userId);
@@ -648,11 +679,38 @@ public class FirebaseHelper {
         // Thêm booking vào Firebase Realtime Database
         newBookingRef.setValue(newBooking).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                callback.onSuccess(newBooking.getId());
+                // Cập nhật trạng thái phòng thành "đã hết phòng" sau khi đặt phòng thành công
+                updateHotelAvailability(hotelId, false, new AvailabilityUpdateCallback() {
+                    @Override
+                    public void onSuccess() {
+                        callback.onSuccess(newBooking.getId());
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        callback.onError(e); // Trả về lỗi nếu cập nhật trạng thái không thành công
+                    }
+                });
             } else {
                 callback.onError(task.getException());
             }
         });
+    }
+    public void updateHotelAvailability(String hotelId, boolean isAvailable, final AvailabilityUpdateCallback callback) {
+        DatabaseReference hotelRef = mReferenceHotels.child(hotelId);
+        hotelRef.child("available").setValue(isAvailable).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                callback.onSuccess();
+            } else {
+                callback.onError(task.getException());
+            }
+        });
+    }
+
+    // Định nghĩa callback cho cập nhật trạng thái
+    public interface AvailabilityUpdateCallback {
+        void onSuccess();
+        void onError(Exception e);
     }
 
     public void updateBookingStatus(String bookingId, String newStatus, final BookingUpdateCallback callback) {

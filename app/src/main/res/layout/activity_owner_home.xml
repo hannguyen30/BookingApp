@@ -10,7 +10,7 @@ tools:context=".owner.HomeActivity">
 
     <View
         android:id="@+id/view"
-        android:layout_width="443dp"
+        android:layout_width="match_parent"
         android:layout_height="143dp"
         android:background="@drawable/custom_rectangle"
         android:backgroundTint="#3249AB"
@@ -24,6 +24,7 @@ tools:context=".owner.HomeActivity">
         android:layout_height="wrap_content"
         android:fontFamily="@font/fira_sans_bold"
         android:text="Hotel Booking"
+
         android:layout_marginTop="10dp"
         android:textColor="@color/white"
         android:textSize="34sp"
@@ -278,54 +279,77 @@ tools:context=".owner.HomeActivity">
                 android:textSize="20sp" />
 
             <ViewFlipper
+                android:id="@+id/viewFlipper"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
                 android:autoStart="true"
                 android:flipInterval="2000"
+                android:background="@drawable/edit_bg"
                 android:inAnimation="@android:anim/slide_in_left"
-                android:outAnimation="@android:anim/slide_out_right">
+                android:outAnimation="@android:anim/slide_out_right"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
+                <!-- CardView cho ảnh đầu tiên -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp">
 
-                <ImageView
-                    android:id="@+id/imageView1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/homestay1" />
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/homestay1" />
+                </androidx.cardview.widget.CardView>
 
-                <ImageView
-                    android:id="@+id/imageView2"
+                <!-- CardView cho ảnh thứ hai -->
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/homestay2" />
-                <ImageView
-                    android:id="@+id/imageView3"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/homestay2" />
+                </androidx.cardview.widget.CardView>
+
+                <!-- CardView cho ảnh thứ ba -->
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/homestay3" />
-                <ImageView
-                    android:id="@+id/imageView4"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/homestay3" />
+                </androidx.cardview.widget.CardView>
+
+                <!-- CardView cho ảnh thứ tư -->
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/homestay4" />
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/your_name_2" />
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/homestay4" />
+                </androidx.cardview.widget.CardView>
+
 
             </ViewFlipper>
         </LinearLayout>

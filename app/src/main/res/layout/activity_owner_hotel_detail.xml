@@ -179,6 +179,13 @@ tools:context=".owner.HotelDetailActivity">
         android:background="#FFFFFF"
         android:entries="@array/guest_numbers" />
 
+    <CheckBox
+        android:id="@+id/checkBoxAvailable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Còn phòng"
+        android:textSize="18sp"/>
+
     <TextView
         android:id="@+id/textViewprice"
         android:layout_width="match_parent"

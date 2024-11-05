@@ -32,6 +32,7 @@ tools:context=".fragments.SearchFragment">
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <Button
         android:id="@+id/btn_provinceSearch"
         style="@style/Widget.Material3.Button"
@@ -42,13 +43,12 @@ tools:context=".fragments.SearchFragment">
         android:fontFamily="@font/fira_sans_bold"
         android:gravity="center|start"
         android:text="Nhập điểm đến của bạn"
-        android:textSize="17sp"
         android:textColor="@color/black"
+        android:textSize="17sp"
         app:icon="@drawable/search_24px"
         app:iconGravity="start"
         app:iconPadding="35dp"
-        app:iconSize="28dp"
-        />
+        app:iconSize="28dp" />
 
     <Button
         android:id="@+id/btn_people"
@@ -116,21 +116,46 @@ tools:context=".fragments.SearchFragment">
             android:inAnimation="@android:anim/slide_in_left"
             android:outAnimation="@android:anim/slide_out_right">
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp">
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/_004365" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/homestay2" />
+            </androidx.cardview.widget.CardView>
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/your_name_2" />
+            <!-- CardView cho ảnh thứ ba -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp">
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/homestay3" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- CardView cho ảnh thứ tư -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/homestay4" />
+            </androidx.cardview.widget.CardView>
         </ViewFlipper>
     </LinearLayout>
 </FrameLayout>

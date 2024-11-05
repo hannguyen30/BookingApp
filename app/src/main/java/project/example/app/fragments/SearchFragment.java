@@ -90,7 +90,7 @@ public class SearchFragment extends Fragment {
                 } else {
                     Intent intent = new Intent(getActivity(), project.example.app.customer.HotelListActivity.class);
                     intent.putExtra("provinceId", provinceId);
-                    intent.putExtra("provinceName", String.valueOf(provinceName));
+                    intent.putExtra("name", String.valueOf(provinceName));
                     startActivity(intent);
                 }
             } catch (Exception e) {

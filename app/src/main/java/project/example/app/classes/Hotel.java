@@ -13,12 +13,14 @@ public class Hotel {
     private int price;
     private int numReviews; // Số lượng đánh giá
     private double rate; // Xếp hạng trung bình
+    private boolean isAvailable;
 
     // Constructors
     public Hotel() {
     }
 
-    public Hotel(String id, String ownerId, String name, String address, String provinceID, String amenities, String imageUrls, int numRooms, int numMaxGuest, int price, int numReviews, double rate) {
+    public Hotel(String id, String ownerId, String name, String address, String provinceID, String amenities,
+                 String imageUrls, int numRooms, int numMaxGuest, int price, int numReviews, double rate,boolean isAvailable) {
         this.id = id;
         this.ownerId = ownerId;
         this.name = name;
@@ -31,9 +33,10 @@ public class Hotel {
         this.price = price;
         this.numReviews = numReviews;
         this.rate = rate;
+        this.isAvailable = isAvailable;
     }
 
-    public Hotel(String ownerId, String name, String address, String provinceID, String amenities, String imageUrls, int price) {
+    public Hotel(String ownerId, String name, String address, String provinceID, String amenities, String imageUrls, int price,boolean isAvailable) {
         this.ownerId = ownerId;
         this.name = name;
         this.provinceID = provinceID;
@@ -43,6 +46,7 @@ public class Hotel {
         this.price = price;
         this.numReviews = 0; // Ban đầu số lượng đánh giá là 0
         this.rate = 0.0; // Ban đầu xếp hạng là 0.0
+        this.isAvailable = true;
     }
 
     // Getter and setter methods
@@ -141,4 +145,13 @@ public class Hotel {
     public void setRate(double rate) {
         this.rate = rate;
     }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        this.isAvailable = available;
+    }
+
 }

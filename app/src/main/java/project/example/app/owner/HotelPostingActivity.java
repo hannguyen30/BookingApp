@@ -212,7 +212,8 @@ public class HotelPostingActivity extends AppCompatActivity {
                                         // Gọi hàm addHotel() để thêm thông tin về khách sạn vào cơ sở dữ liệu
                                         CurrentUserManager currentUserManager = CurrentUserManager.getInstance();
                                         String ownerId = currentUserManager.getUserId(); // Lấy ID của người dùng hiện tại
-                                        firebaseHelper.addHotel(ownerId, hotelName, address, provinceID, amenities, imageUrlsString, numberOfRooms, maxGuestsPerRoom, price, new FirebaseHelper.HotelAddCallback() {
+                                        boolean isAvailable = true;
+                                        firebaseHelper.addHotel(ownerId, hotelName, address, provinceID, amenities, imageUrlsString, numberOfRooms, maxGuestsPerRoom, price, isAvailable, new FirebaseHelper.HotelAddCallback() {
                                             @Override
                                             public void onSuccess(String hotelId) {
                                                 // Xử lý khi thêm khách sạn thành công

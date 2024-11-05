@@ -84,7 +84,8 @@ public class HotelDetailActivity extends AppCompatActivity {
                 intent.getIntExtra("hotelNumMaxGuest", 0),
                 intent.getIntExtra("hotelPrice", 0),
                 intent.getIntExtra("hotelNumReviews", 0),
-                intent.getIntExtra("hotelRate", 0)
+                intent.getIntExtra("hotelRate", 0),
+                intent.getBooleanExtra("roomStatus", true)
         );
 
         firebaseHelper = new FirebaseHelper();

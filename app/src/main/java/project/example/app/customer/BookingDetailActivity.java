@@ -92,8 +92,8 @@ public class BookingDetailActivity extends AppCompatActivity {
                 intent.getIntExtra("hotelNumMaxGuest", 0),
                 intent.getIntExtra("hotelPrice", 0),
                 intent.getIntExtra("hotelNumReviews", 0),
-                intent.getIntExtra("hotelRate", 0)
-
+                intent.getIntExtra("hotelRate", 0),
+                intent.getBooleanExtra("roomStatus", true)
         );
         String bookingId = intent.getStringExtra("bookingId");
         final String[] status = new String[1]; // Khai báo biến status là final mảng String

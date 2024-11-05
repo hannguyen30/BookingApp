@@ -2,14 +2,18 @@ package project.example.app.customer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
-
+import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -25,8 +29,10 @@ public class HotelListActivity extends AppCompatActivity {
 
     private FirebaseHelper firebaseHelper;
     private ArrayList<Hotel> hotels;
+    private ArrayList<Hotel> originalHotels;
     private HotelAdapter adapter;
-
+    private Spinner spinner_price_filter,spinner_rate_filter;
+    private TextView txtFilter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +46,21 @@ public class HotelListActivity extends AppCompatActivity {
         ListView lvw_customerHotelList = findViewById(R.id.lvw_customerHotels);
         Button btn_provinceName = findViewById(R.id.btn_provinceName);
         Button btn_groupDetail = findViewById(R.id.btn_groupDetail);
+        spinner_price_filter = findViewById(R.id.spinner_price_filter);
+        spinner_rate_filter = findViewById(R.id.spinner_rate_filter);
+        txtFilter = findViewById(R.id.txt_filter);
+
+        spinner_price_filter = findViewById(R.id.spinner_price_filter);
+        ArrayAdapter<CharSequence> priceAdapter = ArrayAdapter.createFromResource(this,
+                R.array.price_filter_options, android.R.layout.simple_spinner_item);
+        priceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_price_filter.setAdapter(priceAdapter);
+
+        spinner_rate_filter = findViewById(R.id.spinner_rate_filter);
+        ArrayAdapter<CharSequence> rateAdapter = ArrayAdapter.createFromResource(this,
+                R.array.rate_filter_options, android.R.layout.simple_spinner_item);
+        rateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_rate_filter.setAdapter(rateAdapter);
 
         CurrentGroupDetail currentGroupDetail = CurrentGroupDetail.getInstance();
         String groupDetailFormat = String.valueOf(currentGroupDetail.getNumRoom()) + " phòng - "
@@ -47,19 +68,24 @@ public class HotelListActivity extends AppCompatActivity {
                 + String.valueOf(currentGroupDetail.getNumKid()) + " trẻ em";
         btn_groupDetail.setText(groupDetailFormat);
 
+
         hotels = new ArrayList<>();
+        originalHotels = new ArrayList<>(); // Khởi tạo danh sách gốc
+
         adapter = new HotelAdapter(this, R.layout.item_hotel, hotels);
         lvw_customerHotelList.setAdapter(adapter);
 
         Intent intent = getIntent();
         String provinceId = null;
         String provinceName = null;
+        int numRooms = CurrentGroupDetail.getInstance().getNumRoom();
         if (intent != null) {
             provinceId = intent.getStringExtra("provinceId");
-            provinceName = intent.getStringExtra("provinceName");
+            provinceName = intent.getStringExtra("name");
+
         }
         btn_provinceName.setText(provinceName);
-        loadHotelsByProvinceID(provinceId);
+        loadHotelsByProvinceID(provinceId, numRooms);
 
         // Set up item click listener for ListView
         lvw_customerHotelList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -88,16 +114,39 @@ public class HotelListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        spinner_price_filter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                filterHotels();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                txtFilter.setText("Bộ lọc đang áp dụng: Không có");
+            }
+        });
+
+        spinner_rate_filter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                filterHotels();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                txtFilter.setText("Bộ lọc đang áp dụng: Không có");
+            }
+        });
     }
-
-    private void loadHotelsByProvinceID(String provinceId) {
-        // Sửa tên phương thức ở đây
-        firebaseHelper.getHotelsByProvinceID(provinceId, new FirebaseHelper.HotelListCallback() {
+    private void loadHotelsByProvinceID(String provinceId, int numRooms) {
+        firebaseHelper.getHotelsByProvinceID(provinceId, numRooms, new FirebaseHelper.HotelListCallback() {
             @Override
             public void onCallback(List<Hotel> hotelsList) {
                 hotels.clear();
                 hotels.addAll(hotelsList);
+
+                originalHotels.clear(); // Xóa dữ liệu cũ trong originalHotels
+                originalHotels.addAll(hotelsList); // Sao chép dữ liệu mới vào originalHotels
                 adapter.notifyDataSetChanged();
 
                 TextView txtv_empty = findViewById(R.id.txtv_emptyTxt);
@@ -114,9 +163,58 @@ public class HotelListActivity extends AppCompatActivity {
 
             @Override
             public void onError(Exception e) {
-                // Handle the error
+                // Xử lý lỗi
             }
         });
+    }
+
+    private void filterHotels() {
+        String selectedPrice = spinner_price_filter.getSelectedItem().toString();
+        String selectedRating = spinner_rate_filter.getSelectedItem().toString();
+
+        ArrayList<Hotel> filteredHotels = new ArrayList<>();
+        for (Hotel hotel : originalHotels) {
+            boolean matchesPrice = matchesPriceFilter(hotel, selectedPrice);
+            boolean matchesRating = matchesRatingFilter(hotel, selectedRating);
+
+            if (matchesPrice && matchesRating) {
+                filteredHotels.add(hotel);
+            }
+        }
+
+        adapter.updateHotels(filteredHotels);
+        Log.d("HotelListActivity", "Số lượng khách sạn tìm thấy sau khi lọc: " + filteredHotels.size());
+        txtFilter.setText("Bộ lọc đang áp dụng: Giá: " + selectedPrice + ", Đánh giá: " + selectedRating);
+    }
+
+
+    private boolean matchesPriceFilter(Hotel hotel, String priceRange) {
+        int price = hotel.getPrice();
+        switch (priceRange) {
+            case "Dưới 500.000 VNĐ":
+                return price < 500000;
+            case "500.000 - 1.000.000 VNĐ":
+                return price >= 500000 && price <= 1000000;
+            case "1.000.000 - 2.000.000 VNĐ":
+                return price > 1000000 && price <= 2000000;
+            case "Trên 2.000.000 VNĐ":
+                return price > 2000000;
+            default:
+                return true; // Hiển thị tất cả nếu không có bộ lọc
+        }
+    }
+    private boolean matchesRatingFilter(Hotel hotel, String ratingRange) {
+        double rating = hotel.getRate();
+        switch (ratingRange) {
+            case "Dưới 2.0":
+                return rating < 2.0;
+            case "2.0 - 4.0":
+                return rating >= 2.0 && rating <= 4.0;
+            case "Trên 4.0":
+                return rating > 4.0;
+            default:
+                return true; // Hiển thị tất cả nếu "Không có" được chọn
+        }
     }
 
 }

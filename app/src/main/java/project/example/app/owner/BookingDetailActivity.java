@@ -91,7 +91,8 @@ public class BookingDetailActivity extends AppCompatActivity {
                 intent.getIntExtra("hotelNumMaxGuest", 0),
                 intent.getIntExtra("hotelPrice", 0),
                 intent.getIntExtra("hotelNumReviews", 0),
-                intent.getIntExtra("hotelRate", 0)
+                intent.getIntExtra("hotelRate", 0),
+                intent.getBooleanExtra("isAvailble",true)
         );
         String bookingId = intent.getStringExtra("bookingId");
         final String[] status = new String[1]; // Khai báo biến status là final mảng String
@@ -215,11 +216,23 @@ public class BookingDetailActivity extends AppCompatActivity {
         loadImages(imageUrlList);
 
         btn_cancelBooking.setOnClickListener(v -> {
+            // Cập nhật trạng thái booking thành "canceled"
             firebaseHelper.updateBookingStatus(bookingId, "canceled", new FirebaseHelper.BookingUpdateCallback() {
                 @Override
                 public void onSuccess() {
-                    Toast.makeText(BookingDetailActivity.this, "Đã xác nhận yêu cầu hủy booking", Toast.LENGTH_SHORT).show();
-                    finish();
+                    // Cập nhật trạng thái khả dụng của khách sạn sang true
+                    firebaseHelper.updateHotelAvailability(selectedHotel.getId(), true, new FirebaseHelper.AvailabilityUpdateCallback() {
+                        @Override
+                        public void onSuccess() {
+                            Toast.makeText(BookingDetailActivity.this, "Đã xác nhận yêu cầu hủy booking và cập nhật trạng thái phòng khả dụng", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+                            Toast.makeText(BookingDetailActivity.this, "Gặp lỗi khi cập nhật trạng thái phòng khả dụng", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    finish(); // Đóng activity sau khi cập nhật
                 }
 
                 @Override
@@ -228,6 +241,7 @@ public class BookingDetailActivity extends AppCompatActivity {
                 }
             });
         });
+
 
         btn_completeBooking.setOnClickListener(v -> {
             firebaseHelper.updateBookingStatus(bookingId, "requestComplete", new FirebaseHelper.BookingUpdateCallback() {

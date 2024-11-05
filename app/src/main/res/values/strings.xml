@@ -9,4 +9,17 @@
     <string name="pool">Bể bơi</string>
     <string name="wifi">Wifi</string>
     <string name="delete">Xóa</string>
+    <string-array name="price_filter_options">
+        <item>Tất cả</item>
+        <item>Dưới 500.000 VNĐ</item>
+        <item>500.000 - 1.000.000 VNĐ</item>
+        <item>1.000.000 - 2.000.000 VNĐ</item>
+        <item>Trên 2.000.000 VNĐ</item>
+    </string-array>
+    <string-array name="rate_filter_options">
+        <item>Không có</item>
+        <item>Dưới 2.0</item>
+        <item>2.0 - 4.0</item>
+        <item>Trên 4.0</item>
+    </string-array>
 </resources>

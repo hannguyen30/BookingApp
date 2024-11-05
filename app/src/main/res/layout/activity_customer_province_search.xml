@@ -8,19 +8,37 @@ android:layout_height="match_parent"
 android:background="@drawable/background"
 tools:context=".customer.ProvinceSearchActivity">
 
-<ListView
-    android:id="@+id/lvw_prov"
-    android:layout_width="0dp"
-    android:layout_height="829dp"
-    android:cacheColorHint="#FFFFFF"
-    android:textColor="@color/black"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.454"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-    app:layout_constraintVertical_bias="0.07">'
-</ListView>
+    <ListView
+        android:id="@+id/lvw_prov"
+        android:layout_width="0dp"
+        android:layout_height="829dp"
+        android:cacheColorHint="#FFFFFF"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.07"></ListView>
+    <ListView
+        android:id="@+id/lvw_hotels"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+
+        android:cacheColorHint="#F3E5E5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/item_hotel"
+        android:visibility="gone">
+    </ListView>
+
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -55,4 +73,5 @@ tools:context=".customer.ProvinceSearchActivity">
             android:searchIcon="@drawable/search_24px" />
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
