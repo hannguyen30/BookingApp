@@ -46,9 +46,12 @@ public class HotelListActivity extends AppCompatActivity {
         SearchView searchView = findViewById(R.id.sv_searchview);
         ListView lvw_ownerHotelList = findViewById(R.id.lvw_ownerhotels);
 
+
+
         hotels = new ArrayList<>();
         adapter = new HotelAdapter(this, R.layout.item_hotel, hotels);
         lvw_ownerHotelList.setAdapter(adapter);
+
 
         CurrentUserManager currentUserManager = CurrentUserManager.getInstance();
         loadHotelsByUser(currentUserManager.getUserId());

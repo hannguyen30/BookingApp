@@ -111,6 +111,7 @@ public class HotelDetailActivity extends AppCompatActivity {
         }else{
             isAvailble.setChecked(false);
         }
+        Log.d("HotelDetailActivity", "ProvinceID: " + selectedHotel.getProvinceID());
         int posit = Integer.parseInt(selectedHotel.getProvinceID().substring("province".length()));
         ArrayList<String> imageUrlList = new ArrayList<>(Arrays.asList(selectedHotel.getImageUrls().split(",")));
 

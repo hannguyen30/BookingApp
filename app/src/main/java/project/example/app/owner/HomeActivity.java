@@ -43,6 +43,8 @@ public class HomeActivity extends AppCompatActivity {
         TextView txtv_ownerEmail = findViewById(R.id.txtv_ownerEmail);
         iv_avatar = findViewById(R.id.iv_avatar);
 
+       /* Button btn_manager = findViewById(R.id.btn_manager);*/
+
         String avatarUrl = currentUserManager.getAvatarUrl();
         if (avatarUrl != null && !avatarUrl.isEmpty()) {
             Picasso.get()
@@ -89,5 +91,12 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+
+        /*btn_manager.setOnClickListener(v -> {
+            // Chuyển đến Activity quản lý và truyền isManagerMode = true
+            Intent intent = new Intent(HomeActivity.this, ManagerActivity.class);
+            intent.putExtra("isManagerMode", true); // Truyền giá trị của chế độ manager
+            startActivity(intent);
+        });*/
     }
 }
