@@ -43,7 +43,7 @@ public class HomeActivity extends AppCompatActivity {
         TextView txtv_ownerEmail = findViewById(R.id.txtv_ownerEmail);
         iv_avatar = findViewById(R.id.iv_avatar);
 
-       /* Button btn_manager = findViewById(R.id.btn_manager);*/
+        /*Button btn_manager = findViewById(R.id.btn_manager);*/
 
         String avatarUrl = currentUserManager.getAvatarUrl();
         if (avatarUrl != null && !avatarUrl.isEmpty()) {

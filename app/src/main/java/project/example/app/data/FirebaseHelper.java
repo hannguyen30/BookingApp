@@ -439,8 +439,8 @@ public class FirebaseHelper {
         });
     }
 
-    public void updateHotel(String hotelId, String ownerId, String hotelName, String address, String provinceID, String amenities,
-                            String imageUrlsString, int numberOfRooms, int maxGuestsPerRoom, int price, boolean isAvailable,
+    public void updateHotel(String hotelId, String ownerId, String hotelName, String address, String provinceID, String amenities,String imageUrlsString,
+                            int numberOfRooms, int maxGuestsPerRoom, int price, boolean isAvailable, int currentNumReviews,double currentRate,
                             final HotelUpdateCallback callback) {
 
         // Tạo một DatabaseReference để trỏ đến khách sạn cần cập nhật
@@ -451,6 +451,7 @@ public class FirebaseHelper {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
+
                     // Tạo một đối tượng Hotel mới với thông tin đã được cập nhật
                     Hotel updatedHotel = new Hotel();
                     updatedHotel.setId(hotelId);
@@ -464,6 +465,8 @@ public class FirebaseHelper {
                     updatedHotel.setNumMaxGuest(maxGuestsPerRoom);
                     updatedHotel.setPrice(price);
                     updatedHotel.setAvailable(isAvailable);
+                    updatedHotel.setNumReviews(currentNumReviews);
+                    updatedHotel.setRate(currentRate);
 
                     // Cập nhật thông tin của khách sạn vào Firebase Realtime Database
                     hotelRef.setValue(updatedHotel).addOnCompleteListener(task -> {

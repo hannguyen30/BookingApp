@@ -103,8 +103,9 @@ public class HotelDetailActivity extends AppCompatActivity {
                 intent.getIntExtra("hotelNumMaxGuest", 0),
                 intent.getIntExtra("hotelPrice", 0),
                 intent.getIntExtra("hotelNumReviews", 0),
-                intent.getIntExtra("hotelRate", 0),
+                intent.getDoubleExtra("hotelRate", 0),
                 intent.getBooleanExtra("isAvailable",true)
+
         );
         if(selectedHotel.isAvailable()==true){
             isAvailble.setChecked(true);
@@ -226,6 +227,7 @@ public class HotelDetailActivity extends AppCompatActivity {
 
 
     private void updateHotelInfo() {
+
         String hotelId = selectedHotel.getId();
         String hotelName = editTextHotelName.getText().toString().trim();
         String address = editTextHotelAddress.getText().toString().trim();
@@ -236,6 +238,8 @@ public class HotelDetailActivity extends AppCompatActivity {
         int maxGuestsPerRoom = Integer.parseInt(spinnerMaxGuests.getSelectedItem().toString());
         int price = parsePriceFromEditText(editTextPrice);
         boolean isAvailable = isAvailble.isChecked();
+        int currentNumReviews = selectedHotel.getNumReviews();
+        double currentRate = selectedHotel.getRate();
 
         // Lấy danh sách các URL của hình ảnh từ adapter
         List<String> tempUrls = imageAdapter.getImageUrls(); // Lấy danh sách tạm thời từ adapter
@@ -279,7 +283,7 @@ public class HotelDetailActivity extends AppCompatActivity {
 
                                 // Nếu đã tải lên tất cả các ảnh, tiến hành cập nhật thông tin khách sạn
                                 if (latch.getCount() == 0) {
-                                    updateHotelInfoInDatabase(hotelId, hotelName, address, provinceID, amenities, finalImageUrls, numberOfRooms, maxGuestsPerRoom, price, isAvailable);
+                                    updateHotelInfoInDatabase(hotelId, hotelName, address, provinceID, amenities, finalImageUrls, numberOfRooms, maxGuestsPerRoom, price, isAvailable,currentNumReviews,currentRate);
                                 }
                             });
                         }).addOnFailureListener(exception -> {
@@ -298,21 +302,23 @@ public class HotelDetailActivity extends AppCompatActivity {
             executorService.shutdown();
         } else {
             // Nếu không có ảnh mới để tải lên, trực tiếp cập nhật thông tin khách sạn
-            updateHotelInfoInDatabase(hotelId, hotelName, address, provinceID, amenities, finalImageUrls, numberOfRooms, maxGuestsPerRoom, price,isAvailable);
+            updateHotelInfoInDatabase(hotelId, hotelName, address, provinceID, amenities, finalImageUrls, numberOfRooms, maxGuestsPerRoom, price,isAvailable,currentNumReviews,currentRate);
         }
     }
 
-    private void updateHotelInfoInDatabase(String hotelId, String hotelName, String address, String provinceID, String amenities, List<String> finalImageUrls, int numberOfRooms, int maxGuestsPerRoom, int price, boolean isAvailable) {
+    private void updateHotelInfoInDatabase(String hotelId, String hotelName, String address, String provinceID, String amenities, List<String> finalImageUrls,
+                                           int numberOfRooms, int maxGuestsPerRoom, int price, boolean isAvailable,int currentNumReviews,double currentRate) {
         String imageUrlsString = TextUtils.join(",", finalImageUrls);
         CurrentUserManager currentUserManager = CurrentUserManager.getInstance();
         String ownerId = currentUserManager.getUserId(); // Lấy ID của người dùng hiện tại
 
         // Gọi hàm updateHotel() để cập nhật thông tin về khách sạn trong cơ sở dữ liệu
-        firebaseHelper.updateHotel(hotelId, ownerId, hotelName, address, provinceID, amenities, imageUrlsString, numberOfRooms, maxGuestsPerRoom, price, isAvailable, new FirebaseHelper.HotelUpdateCallback() {
+        firebaseHelper.updateHotel(hotelId, ownerId, hotelName, address, provinceID, amenities, imageUrlsString, numberOfRooms, maxGuestsPerRoom, price, isAvailable,currentNumReviews,currentRate,new FirebaseHelper.HotelUpdateCallback() {
             @Override
             public void onSuccess() {
                 // Xử lý khi cập nhật thông tin khách sạn thành công
                 Log.d("UpdateHotel", "Thông tin của khách sạn với ID: " + hotelId + " đã được cập nhật thành công");
+
                 Intent intent = new Intent(HotelDetailActivity.this, HotelListActivity.class);
                 startActivity(intent);
                 finish();
