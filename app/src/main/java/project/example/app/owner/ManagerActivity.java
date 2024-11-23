@@ -68,7 +68,7 @@ public class ManagerActivity extends AppCompatActivity {
         SearchView searchView = findViewById(R.id.sv_searchview);
         ListView lvw_ownerHotelList = findViewById(R.id.lvw_managerHotels);
 
-        isManagerMode = getIntent().getBooleanExtra("isManagerMode", false); // Mặc định là false
+        isManagerMode = getIntent().getBooleanExtra("isManagerModea", false); // Mặc định là false
 
         hotels = new ArrayList<>();
         adapter = new HotelAdapter(this, R.layout.item_manager, hotels);
