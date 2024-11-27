@@ -324,7 +324,7 @@ public class FirebaseHelper {
         Log.d("GetHotels", "Tìm khách sạn với provinceId: " + provinceId + " và số phòng: " + numRooms);
 
         // Lấy dữ liệu từ Firebase theo provinceId
-        mReferenceHotels.orderByChild("provinceId").equalTo(provinceId)
+        mReferenceHotels.orderByChild("provinceID").equalTo("province"+provinceId)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

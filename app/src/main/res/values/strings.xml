@@ -22,4 +22,9 @@
         <item>2.0 - 4.0</item>
         <item>Trên 4.0</item>
     </string-array>
+
+    <string-array name="price_sort_options">
+        <item>Giá tăng dần</item>
+        <item>Giá giảm dần</item>
+    </string-array>
 </resources>

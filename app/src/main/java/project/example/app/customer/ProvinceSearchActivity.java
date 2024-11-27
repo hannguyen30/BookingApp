@@ -76,6 +76,7 @@ public class ProvinceSearchActivity extends AppCompatActivity {
             Intent intent = new Intent(ProvinceSearchActivity.this, HomeActivity.class);
             intent.putExtra("selectedProvinceName", selectedProvince.getName());
             intent.putExtra("selectedProvinceId", selectedProvince.getId());
+            Log.d("abasdsafasdfsdafsd", "Error: " + selectedProvince.getId());
             startActivity(intent);
             finish();
         });

@@ -31,7 +31,7 @@ public class HotelListActivity extends AppCompatActivity {
     private ArrayList<Hotel> hotels;
     private ArrayList<Hotel> originalHotels;
     private HotelAdapter adapter;
-    private Spinner spinner_price_filter,spinner_rate_filter;
+    private Spinner spinner_price_filter,spinner_rate_filter,spinner_sort_filter;
     private TextView txtFilter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,7 @@ public class HotelListActivity extends AppCompatActivity {
         Button btn_groupDetail = findViewById(R.id.btn_groupDetail);
         spinner_price_filter = findViewById(R.id.spinner_price_filter);
         spinner_rate_filter = findViewById(R.id.spinner_rate_filter);
+        spinner_sort_filter = findViewById(R.id.spinner_sort_filter);
         txtFilter = findViewById(R.id.txt_filter);
 
         spinner_price_filter = findViewById(R.id.spinner_price_filter);
@@ -61,6 +62,12 @@ public class HotelListActivity extends AppCompatActivity {
                 R.array.rate_filter_options, android.R.layout.simple_spinner_item);
         rateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_rate_filter.setAdapter(rateAdapter);
+
+        spinner_sort_filter = findViewById(R.id.spinner_sort_filter);
+        ArrayAdapter<CharSequence> sortAdapter = ArrayAdapter.createFromResource(this,
+                R.array.price_sort_options, android.R.layout.simple_spinner_item);
+        sortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_sort_filter.setAdapter(sortAdapter);
 
         CurrentGroupDetail currentGroupDetail = CurrentGroupDetail.getInstance();
         String groupDetailFormat = String.valueOf(currentGroupDetail.getNumRoom()) + " phòng - "
@@ -81,7 +88,7 @@ public class HotelListActivity extends AppCompatActivity {
         int numRooms = CurrentGroupDetail.getInstance().getNumRoom();
         if (intent != null) {
             provinceId = intent.getStringExtra("provinceId");
-            provinceName = intent.getStringExtra("name");
+            provinceName = intent.getStringExtra("provinceName");
 
         }
         btn_provinceName.setText(provinceName);
@@ -137,6 +144,18 @@ public class HotelListActivity extends AppCompatActivity {
                 txtFilter.setText("Bộ lọc đang áp dụng: Không có");
             }
         });
+        spinner_sort_filter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sortHotelsByPrice(); // Gọi hàm sắp xếp khi lựa chọn thay đổi
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                txtFilter.setText("Bộ lọc đang áp dụng: Không có");
+            }
+        });
+
     }
     private void loadHotelsByProvinceID(String provinceId, int numRooms) {
         firebaseHelper.getHotelsByProvinceID(provinceId, numRooms, new FirebaseHelper.HotelListCallback() {
@@ -184,6 +203,7 @@ public class HotelListActivity extends AppCompatActivity {
 
         adapter.updateHotels(filteredHotels);
         Log.d("HotelListActivity", "Số lượng khách sạn tìm thấy sau khi lọc: " + filteredHotels.size());
+        sortHotelsByPrice();
         txtFilter.setText("Bộ lọc đang áp dụng: Giá: " + selectedPrice + ", Đánh giá: " + selectedRating);
     }
 
@@ -215,6 +235,19 @@ public class HotelListActivity extends AppCompatActivity {
             default:
                 return true; // Hiển thị tất cả nếu "Không có" được chọn
         }
+    }
+    private void sortHotelsByPrice() {
+        String sortOption = spinner_sort_filter.getSelectedItem().toString();
+        if (sortOption.equals("Giá tăng dần")) {
+            // Sắp xếp theo giá tăng dần
+            hotels.sort((hotel1, hotel2) -> Integer.compare(hotel1.getPrice(), hotel2.getPrice()));
+        } else if (sortOption.equals("Giá giảm dần")) {
+            // Sắp xếp theo giá giảm dần
+            hotels.sort((hotel1, hotel2) -> Integer.compare(hotel2.getPrice(), hotel1.getPrice()));
+        }
+
+        adapter.notifyDataSetChanged(); // Cập nhật giao diện sau khi sắp xếp
+        Log.d("HotelListActivity", "Danh sách khách sạn sau khi sắp xếp theo giá: " + hotels.size());
     }
 
 }
