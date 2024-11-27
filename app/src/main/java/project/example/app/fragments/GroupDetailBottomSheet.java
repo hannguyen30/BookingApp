@@ -13,7 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import project.example.app.R;
 
 public class GroupDetailBottomSheet extends BottomSheetDialogFragment {
-    private static final int MAX_ROOMS = 5;
+    private static final int MAX_ROOMS = 10;
     private static final int MIN_ROOMS = 1;
     private static final int MIN_ADULTS = 1;
     private static final int MIN_KIDS = 0;

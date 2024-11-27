@@ -682,23 +682,55 @@ public class FirebaseHelper {
         // Thêm booking vào Firebase Realtime Database
         newBookingRef.setValue(newBooking).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                // Cập nhật trạng thái phòng thành "đã hết phòng" sau khi đặt phòng thành công
-                updateHotelAvailability(hotelId, false, new AvailabilityUpdateCallback() {
+                // Lấy thông tin khách sạn hiện tại
+                DatabaseReference hotelRef = mReferenceHotels.child(hotelId);
+                hotelRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onSuccess() {
-                        callback.onSuccess(newBooking.getId());
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // Lấy số lượng phòng hiện tại
+                        Integer currentNumRooms = dataSnapshot.child("numRooms").getValue(Integer.class);
+                        if (currentNumRooms != null && currentNumRooms >= numberOfRooms) {
+                            // Cập nhật số lượng phòng còn lại
+                            int updatedNumRooms = currentNumRooms - numberOfRooms;
+                            hotelRef.child("numRooms").setValue(updatedNumRooms).addOnCompleteListener(updateTask -> {
+                                if (updateTask.isSuccessful()) {
+                                    // Kiểm tra nếu số phòng còn lại bằng 0, cập nhật trạng thái phòng
+                                    if (updatedNumRooms == 0) {
+                                        updateHotelAvailability(hotelId, false, new AvailabilityUpdateCallback() {
+                                            @Override
+                                            public void onSuccess() {
+                                                callback.onSuccess(newBooking.getId());
+                                            }
+
+                                            @Override
+                                            public void onError(Exception e) {
+                                                callback.onError(e); // Lỗi khi cập nhật trạng thái
+                                            }
+                                        });
+                                    } else {
+                                        // Nếu còn phòng, không cập nhật trạng thái
+                                        callback.onSuccess(newBooking.getId());
+                                    }
+                                } else {
+                                    callback.onError(updateTask.getException()); // Lỗi khi cập nhật số lượng phòng
+                                }
+                            });
+                        } else {
+                            callback.onError(new Exception("Không đủ phòng để đặt"));
+                        }
                     }
 
                     @Override
-                    public void onError(Exception e) {
-                        callback.onError(e); // Trả về lỗi nếu cập nhật trạng thái không thành công
+                    public void onCancelled(DatabaseError databaseError) {
+                        callback.onError(databaseError.toException()); // Lỗi khi lấy thông tin khách sạn
                     }
                 });
             } else {
-                callback.onError(task.getException());
+                callback.onError(task.getException()); // Lỗi khi thêm booking
             }
         });
     }
+
     public void updateHotelAvailability(String hotelId, boolean isAvailable, final AvailabilityUpdateCallback callback) {
         DatabaseReference hotelRef = mReferenceHotels.child(hotelId);
         hotelRef.child("available").setValue(isAvailable).addOnCompleteListener(task -> {
@@ -856,6 +888,12 @@ public class FirebaseHelper {
     }
 
     public void getBookingById(String bookingId, BookingCallback callback) {
+        // Kiểm tra nếu bookingId là null hoặc rỗng
+        if (bookingId == null || bookingId.isEmpty()) {
+            callback.onError(new Exception("Booking ID is null or empty"));
+            return; // Tránh gọi Firebase nếu bookingId không hợp lệ
+        }
+
         mReferenceBookings.child(bookingId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -874,24 +912,39 @@ public class FirebaseHelper {
         });
     }
 
+
     public void getAllConfirmBookedHotels(String ownerId, final HotelListWithBookingIdCallback callback) {
         mReferenceHotels.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot hotelSnapshot) {
                 List<Hotel> ownerHotels = new ArrayList<>();
+                Map<String, String> bookingIdMap = new HashMap<>();
+
+                // Lấy tất cả các khách sạn của chủ sở hữu
                 for (DataSnapshot snapshot : hotelSnapshot.getChildren()) {
                     Hotel hotel = snapshot.getValue(Hotel.class);
                     if (hotel != null && hotel.getOwnerId().equals(ownerId)) {
                         ownerHotels.add(hotel);
+                        String bookingId = snapshot.child("bookingId").getValue(String.class);
+                        if (bookingId != null) {
+                            bookingIdMap.put(hotel.getId(), bookingId);
+                        }
                     }
                 }
 
+                Log.d("FirebaseData", "Owner Hotels Count: " + ownerHotels.size());
+                Log.d("FirebaseData", "Booking ID Map: " + bookingIdMap.toString());
+
+                // Nếu không có khách sạn nào của chủ sở hữu, trả về danh sách trống và bản đồ trống
                 if (ownerHotels.isEmpty()) {
-                    callback.onSuccess(new ArrayList<>(), new HashMap<>()); // Return empty list and map if no matching hotels found
+                    callback.onSuccess(new ArrayList<>(), new HashMap<>());
                     return;
                 }
-
+                
                 fetchConfirmBookedHotelDetails(ownerHotels, callback);
+
+                // Nếu có khách sạn, gọi phương thức tiếp theo để lấy chi tiết booking
+                callback.onSuccess(ownerHotels, bookingIdMap);
             }
 
             @Override
@@ -900,6 +953,8 @@ public class FirebaseHelper {
             }
         });
     }
+
+
 
     private void fetchConfirmBookedHotelDetails(List<Hotel> ownerHotels, final HotelListWithBookingIdCallback callback) {
         mReferenceBookings.addListenerForSingleValueEvent(new ValueEventListener() {
