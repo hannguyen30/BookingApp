@@ -173,7 +173,7 @@ public class CreateBookingActivity extends AppCompatActivity {
                 public void onSuccess(String savedId) {
                     // Hiển thị thông báo thành công
                     runOnUiThread(() -> {
-                        Toast.makeText(CreateBookingActivity.this, "Book thành công!.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CreateBookingActivity.this, "Book thành công!", Toast.LENGTH_SHORT).show();
                         Intent newIntent = new Intent(CreateBookingActivity.this, HomeActivity.class);
                         startActivity(newIntent);
                         finish();
