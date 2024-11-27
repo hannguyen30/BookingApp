@@ -98,6 +98,12 @@ public class BookingDetailActivity extends AppCompatActivity {
         final String[] status = new String[1]; // Khai báo biến status là final mảng String
 
         firebaseHelper = new FirebaseHelper();
+
+        if (bookingId == null || bookingId.isEmpty()) {
+            // Thông báo lỗi cho người dùng nếu bookingId không hợp lệ
+            Toast.makeText(this, "Booking ID không hợp lệ", Toast.LENGTH_SHORT).show();
+            return; // Dừng việc gọi đến Firebase
+        }
         firebaseHelper.getBookingById(bookingId, new FirebaseHelper.BookingCallback() {
             @Override
             public void onSuccess(Booking booking) {

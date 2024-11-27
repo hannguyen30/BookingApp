@@ -18,6 +18,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Calendar;
@@ -95,10 +96,12 @@ public class CreateBookingActivity extends AppCompatActivity {
         CurrentGroupDetail currentGroupDetail = CurrentGroupDetail.getInstance();
         CurrentUserManager currentUserManager = CurrentUserManager.getInstance();
 
-        int dayNum = intent.getIntExtra("dayNum", 0);
-        int totalPrice = selectedHotel.getPrice() * dayNum * currentGroupDetail.getNumRoom() ;
+        String checkInDate = intent.getStringExtra("checkInDate");
+        int dayNum = intent.getIntExtra("selectedDays", 0);
+        int selectedRooms = intent.getIntExtra("selectedRooms", 0);
+        int totalPrice = selectedHotel.getPrice() * dayNum * selectedRooms;
 
-        String numRoomFormat = String.valueOf(currentGroupDetail.getNumRoom()) + " phòng";
+        String numRoomFormat = String.valueOf( selectedRooms + " phòng");
         String numAdultFormat = String.valueOf(currentGroupDetail.getNumAdult()) + " người lớn";
         String numKidFormat = String.valueOf(currentGroupDetail.getNumKid()) + " trẻ em";
         String priceFormat = formatCurrency(selectedHotel.getPrice());
@@ -159,11 +162,36 @@ public class CreateBookingActivity extends AppCompatActivity {
         setAmenities(selectedHotel.getAmenities());
         setupRecyclerView();
         loadImages(imageUrlList);
-        setBookingDates(dayNum);
 
-        String checkInDate = txtv_bookingCheckin.getText().toString();
+        //datehere
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+
+        try {
+            // Chuyển checkinDate từ String thành Date
+            Date checkInDateObj = dateFormat.parse(checkInDate);
+
+            if (checkInDateObj != null) {
+                // Cài đặt đối tượng Calendar với checkinDate
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(checkInDateObj);
+
+                // Cộng thêm dayNum ngày vào calendar
+                calendar.add(Calendar.DAY_OF_YEAR, dayNum);
+
+                // Tính toán checkoutDate
+                String checkoutDate = dateFormat.format(calendar.getTime());
+
+                // Hiển thị ngày trong các TextView
+                txtv_bookingCheckin.setText(checkInDate);  // Hiển thị ngày check-in
+                txtv_bookingCheckout.setText(checkoutDate);  // Hiển thị ngày checkout
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         String checkOutDate = txtv_bookingCheckout.getText().toString();
-        int numRoom = currentGroupDetail.getNumRoom();
+        int numRoom = selectedRooms;
         int numAdult = currentGroupDetail.getNumAdult();
         int numKid = currentGroupDetail.getNumKid();
 
@@ -211,23 +239,6 @@ public class CreateBookingActivity extends AppCompatActivity {
 
     }
 
-    private void setBookingDates(int dayNum) {
-        // Định dạng ngày tháng năm
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-
-        // Lấy ngày mai
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, 1);
-        String checkinDate = dateFormat.format(calendar.getTime());
-
-        // Lấy ngày cách ngày mai dayNum ngày
-        calendar.add(Calendar.DAY_OF_YEAR, dayNum);
-        String checkoutDate = dateFormat.format(calendar.getTime());
-
-        // Hiển thị ngày trong TextView
-        txtv_bookingCheckin.setText(checkinDate);
-        txtv_bookingCheckout.setText(checkoutDate);
-    }
 
     private void setAmenities(String amenities) {
         // Tách chuỗi tiện ích thành một mảng các tiện ích riêng lẻ

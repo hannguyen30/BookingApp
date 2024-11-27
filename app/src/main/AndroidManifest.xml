@@ -37,6 +37,9 @@
             android:name=".customer.DateSelectionActivity"
             android:exported="false" />
         <activity
+            android:name=".customer.RoomSelectionActivity"
+            android:exported="false" />
+        <activity
             android:name=".customer.ProvinceSearchActivity"
             android:exported="false" />
         <activity

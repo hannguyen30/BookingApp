@@ -105,11 +105,18 @@ public class BookingDetailActivity extends AppCompatActivity {
         txtv_guestEmail.setText(currentUserManager.getUserEmail());
         txtv_guestPhone.setText(currentUserManager.getUserPhone());
         txtv_hotelName.setText(selectedHotel.getName());
+        txtv_hotelName.setText(selectedHotel.getName());
         txtv_hotelAddress.setText(selectedHotel.getAddress());
         txtv_price.setText(priceFormat);
 
         firebaseHelper = new FirebaseHelper();
 
+        // Kiểm tra nếu bookingId là null hoặc rỗng
+        if (bookingId == null || bookingId.isEmpty()) {
+            // Thông báo lỗi cho người dùng nếu bookingId không hợp lệ
+            Toast.makeText(this, "Booking ID không hợp lệ", Toast.LENGTH_SHORT).show();
+            return; // Dừng việc gọi đến Firebase
+        }
         firebaseHelper.getBookingById(bookingId, new FirebaseHelper.BookingCallback() {
             @Override
             public void onSuccess(Booking booking) {

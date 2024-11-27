@@ -142,14 +142,12 @@ public class BookingCanceledFragment extends Fragment {
     private String findBookingIdForHotel(String hotelId) {
         for (Map.Entry<String, String> entry : hotelBookingIdMap.entrySet()) {
             String key = entry.getKey();
-            if (key.startsWith(hotelId + "-")) {
-                return entry.getValue();
-            }
-            else {
+            // Kiểm tra nếu hotelId có tồn tại trong key
+            if (key.equals(hotelId)) {
                 return entry.getValue();
             }
         }
-        return null;
+        return null; // Nếu không tìm thấy bookingId
     }
 
     private void populateIntentWithHotelDetails(Intent intent, Hotel hotel, String bookingId) {
